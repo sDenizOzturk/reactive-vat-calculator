@@ -1,0 +1,59 @@
+@import './base.css';
+@import './animation.css';
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap');
+
+#app {
+  margin: 0 auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: var(--font-family);
+  background: var(--color3_1);
+  color: var(--color2);
+  margin: 0;
+  padding: 0;
+}
+
+h2,
+h3,
+h4,
+span {
+  text-align: center;
+}
+
+h3,
+h4 {
+  margin: 0.1rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+input[type='number'] {
+  text-align: center !important;
+}
+h1,
+h2 {
+  margin: 0.5rem 0;
+  padding: 0;
+}
+.width100 {
+  min-width: 100%;
+}
+.semi-bold {
+  font-weight: 500;
+}
