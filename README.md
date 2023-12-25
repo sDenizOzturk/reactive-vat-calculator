@@ -1,5 +1,16 @@
 # reactive-vat-calculator
 
+According to Google search results, common VAT calculation applications are non-reactive. Those apps expect users to do multiple steps each time, such as:
+
+1. Enter the amount
+1. Select the calculation type
+1. Select rate
+1. Click the 'calculate' button
+
+Using this app, users can make those calculations with only one step:
+
+1. Just enter the amount on the correct input field and the results will be displayed simultaneously.
+
 ## Technologies Used
 
 - Vue 3
