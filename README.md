@@ -5,6 +5,7 @@
 - Vue 3
 - Composition API
 - Pinia
+- Vue I18n
 
 ## Live App URL
 

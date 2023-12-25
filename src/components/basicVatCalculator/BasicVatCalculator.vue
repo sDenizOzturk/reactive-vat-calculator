@@ -1,36 +1,34 @@
 <template>
   <BaseCard style="margin: 0.5rem">
-    <h2>Basit Hesaplayıcı</h2>
+    <h2>{{ t('basicCalculator') }}</h2>
     <BaseSpacer />
 
-    <BaseWrapper mode="custom-grid" style="gap: 0.3rem 1rem">
-      <BaseWrapper mode="grid-2" style="gap: 0.3rem 1rem">
-        <h4><u>KDV Oranı</u></h4>
-        <h4><u>Hariç Tutar</u></h4>
-        <BaseInput v-model="rate" type="number" placeholder="Oranı giriniz" :style="inputStyle" />
+    <BaseWrapper mode="custom-grid" :style="wrapperStyle">
+      <BaseWrapper mode="grid-2" :style="wrapperStyle">
+        <h4>
+          <u>{{ t('vatRate') }}</u>
+        </h4>
+        <h4>
+          <u>{{ t('excludedAmount') }}</u>
+        </h4>
         <BaseInput
-          v-model="vatExcludedValue"
+          v-model="rate"
           type="number"
-          :placeholder="inputPlaceholder"
+          :placeholder="t('enterTheRate')"
           :style="inputStyle"
         />
+        <BaseInput v-model="vatExcludedValue" type="number" :placeholder="inputPlaceholder" />
       </BaseWrapper>
 
-      <BaseWrapper mode="grid-2" style="gap: 0.3rem 1rem">
-        <h4><u>KDV Tutarı</u></h4>
-        <h4><u>Dahil Tutar</u></h4>
-        <BaseInput
-          v-model="vatValue"
-          type="number"
-          :style="inputStyle"
-          :placeholder="inputPlaceholder"
-        />
-        <BaseInput
-          v-model="vatIncludedValue"
-          type="number"
-          :placeholder="inputPlaceholder"
-          :style="inputStyle"
-        />
+      <BaseWrapper mode="grid-2" :style="wrapperStyle">
+        <h4>
+          <u>{{ t('vatAmount') }}</u>
+        </h4>
+        <h4>
+          <u>{{ t('includedAmount') }}</u>
+        </h4>
+        <BaseInput v-model="vatValue" type="number" :placeholder="inputPlaceholder" />
+        <BaseInput v-model="vatIncludedValue" type="number" :placeholder="inputPlaceholder" />
       </BaseWrapper>
     </BaseWrapper>
   </BaseCard>
@@ -40,6 +38,12 @@
 import { ref, watch, nextTick } from 'vue'
 import useVatCalculations from '@/hooks/vatCalculations.js'
 const { calculateFromExcluded, calculateFromVat, calculateFromIncluded } = useVatCalculations()
+
+import { useI18n } from 'vue-i18n'
+import useI18nMessages from '@/hooks/i18nMessages.js'
+const { t } = useI18n({
+  messages: useI18nMessages().vatCalculationPageMessages
+})
 
 const vatExcludedValue = ref('')
 const vatValue = ref('')
@@ -71,8 +75,9 @@ watch(vatIncludedValue, (newValue) => {
   doWatchJob(calculateFromIncluded, [newValue, rate, vatExcludedValue, vatValue])
 })
 
-const inputStyle = '' //'text-align: center; '
-const inputPlaceholder = 'Tutarı giriniz'
+const inputPlaceholder = t('enterTheAmount')
+
+const wrapperStyle = 'gap: 0.3rem 1rem'
 </script>
 
 <style scoped>
@@ -84,7 +89,12 @@ const inputPlaceholder = 'Tutarı giriniz'
   grid-row-gap: 0;
 }
 input {
-  max-width: 6.3rem;
+  max-width: 7.5rem;
+  margin: auto;
+}
+h4 {
+  max-width: 7.5rem;
+  margin: auto;
 }
 
 @media (pointer: none), (pointer: coarse) {

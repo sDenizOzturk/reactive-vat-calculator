@@ -1,11 +1,17 @@
 <template>
-  <BaseCheckBox label="KDV Hariç Tutardan Hesapla" v-model="options.fromVatExcluded" />
-  <BaseCheckBox label="KDV Tutarından Hesapla" v-model="options.fromVat" />
-  <BaseCheckBox label="KDV Dahil Tutardan Hesapla" v-model="options.fromVatIncluded" />
+  <BaseCheckBox :label="t('calculateFromExcludingVatAmount')" v-model="options.fromVatExcluded" />
+  <BaseCheckBox :label="t('calculateFromVatAmount')" v-model="options.fromVat" />
+  <BaseCheckBox :label="t('calculateFromInludingVatAmount')" v-model="options.fromVatIncluded" />
 </template>
 
 <script setup>
 import { defineEmits, defineProps, toRefs, watch } from 'vue'
+
+import { useI18n } from 'vue-i18n'
+import useI18nMessages from '@/hooks/i18nMessages.js'
+const { t } = useI18n({
+  messages: useI18nMessages().vatCalculationPageMessages
+})
 
 const props = defineProps(['options'])
 const { options } = toRefs(props)

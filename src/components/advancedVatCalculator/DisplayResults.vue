@@ -4,9 +4,15 @@
       <h3>{{ title }}</h3>
       <BaseSpacer />
       <BaseWrapper mode="grid-3 width100">
-        <h4><u>Hariç Tutar</u></h4>
-        <h4><u>KDV Tutarı</u></h4>
-        <h4><u>Dahil Tutar</u></h4>
+        <h4>
+          <u>{{ t('excludedAmount') }}</u>
+        </h4>
+        <h4>
+          <u>{{ t('vatAmount') }}</u>
+        </h4>
+        <h4>
+          <u>{{ t('includedAmount') }}</u>
+        </h4>
       </BaseWrapper>
 
       <TheResults
@@ -33,6 +39,13 @@
 
 <script setup>
 import { computed, toRefs } from 'vue'
+
+import { useI18n } from 'vue-i18n'
+import useI18nMessages from '@/hooks/i18nMessages.js'
+const { t } = useI18n({
+  messages: useI18nMessages().vatCalculationPageMessages
+})
+
 import TheResults from './TheResults.vue'
 
 const props = defineProps({
@@ -44,7 +57,14 @@ const props = defineProps({
 const { rate } = toRefs(props)
 
 const title = computed(() => {
-  if (rate.value.isCustom) return `%${rate.value.value} (${rate.value.label})`
+  if (rate.value.isCustom) return `%${rate.value.value} (${t('custom')})`
   else return rate.value.label
 })
 </script>
+
+<style scoped>
+h4 {
+  max-width: 7rem;
+  margin: auto;
+}
+</style>

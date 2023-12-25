@@ -15,8 +15,14 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
-const app = createApp(App)
+import { createI18n } from 'vue-i18n'
+const i18n = createI18n({
+  legacy: false,
+  fallbackLocale: 'en'
+})
 
+const app = createApp(App)
+app.use(i18n)
 app
   .use(pinia)
   .component('BaseCard', BaseCard)

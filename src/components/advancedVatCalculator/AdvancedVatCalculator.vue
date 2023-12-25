@@ -1,7 +1,7 @@
 <template>
   <div>
     <BaseCard style="margin: 0.5rem">
-      <h2>Gelişmiş Hesaplayıcı</h2>
+      <h2>{{ t('advancedCalculator') }}</h2>
       <BaseSpacer />
       <SelectOptions
         :options="selectedOptions"
@@ -12,7 +12,7 @@
       <BaseInput
         v-model="baseValue"
         type="number"
-        placeholder="Tutarı giriniz"
+        :placeholder="t('enterTheAmount')"
         style="text-align: center"
       />
     </BaseCard>
@@ -32,6 +32,13 @@
 
 <script setup>
 import { ref, watch } from 'vue'
+
+import { useI18n } from 'vue-i18n'
+import useI18nMessages from '@/hooks/i18nMessages.js'
+const { t } = useI18n({
+  messages: useI18nMessages().vatCalculationPageMessages
+})
+
 import DisplayResults from './DisplayResults.vue'
 import SelectOptions from './SelectOptions.vue'
 import SelectRates from './SelectRates.vue'

@@ -28,7 +28,6 @@ export const useSettingsStore = defineStore(
       },
       custom: {
         value: 18,
-        label: 'Özel',
         display: false,
         isCustom: true
       }
@@ -36,7 +35,9 @@ export const useSettingsStore = defineStore(
 
     const mode = ref('basic')
 
-    return { selectedOptions, selectedRates, mode }
+    const language = ref('tr')
+
+    return { selectedOptions, selectedRates, mode, language }
   },
   { persist: true }
 )
